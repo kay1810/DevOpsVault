@@ -7,3 +7,6 @@
 * terraform deployment
 * ansible deployment
 * Azure deployment
+* runbook to restart server
+* RestApi examples
+
