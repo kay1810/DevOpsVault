@@ -4,3 +4,5 @@
 * java build
 * python build
 * build pipeline
+* npm build
+* nuget build
