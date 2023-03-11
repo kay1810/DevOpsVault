@@ -8,3 +8,7 @@
 * Install git / Update git in agents
 * copy a file to servers (playbook & adhoc)
 * copy key to server
+* get value from vault
+* example for handler
+* error handling example
+* variable /env variable example
