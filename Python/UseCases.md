@@ -8,3 +8,5 @@
 * exception handling
 * rest api fetch user data and store it to yaml
 * Rest api - put,post,delete use cases
+* get variable from vault
+* use proxy
