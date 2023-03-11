@@ -7,3 +7,4 @@
 * Install nginx and start service
 * Install git / Update git in agents
 * copy a file to servers (playbook & adhoc)
+* copy key to server
