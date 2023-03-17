@@ -34,3 +34,11 @@ Deploy or scale your containers easily, securely, and with high availability
 Provide a service (internally or externally) from a container group
 Move your containers from one host to another when there’s a host-specific problem
 Manage your configuration data—like environment variables—easily
+
+** Is it possible to pull/push Image, run/stop other docker containers from inside a container ? **
+
+
+
+** talk to host docker daemon from inside a container ?**
+
+**I have an app and a db container running on a host. How can these 2 containers talk to each other ? **
