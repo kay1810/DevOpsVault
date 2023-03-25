@@ -3,7 +3,7 @@
   * [service mesh in service to service communication ex gRPC Protocol](#service mesh in service to service communication ex gRPC Protocol)
  
 - [Basic Software Concepts](https://github.com/kay1810/DevOpsVault/blob/main/Basics/BasicConcepts.md#basic-software-concepts)
-  * [web server vs application server vs database server](#'web server vs application server vs database server')
+  * [web server vs application server vs database server](https://github.com/kay1810/DevOpsVault/blob/main/Basics/BasicConcepts.md#web-server-vs-application-server-vs-database-server)
   * [Dotnet Application](#Dotnet Application)
   * [Nodejs Application](#Nodejs Application)
   * [Java Application](#Java Application)
