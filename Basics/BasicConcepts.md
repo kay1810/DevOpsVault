@@ -2,8 +2,8 @@
   * [Certificate setup](#CertificateSetup)
   * [service mesh in service to service communication ex gRPC Protocol](#service mesh in service to service communication ex gRPC Protocol)
  
-- [Basic Software Concepts](#Basic Software Concepts)
-  * [web server vs application server vs database server](#web server vs application server vs database server)
+- [Basic Software Concepts](#'Basic Software Concepts')
+  * [web server vs application server vs database server](#'web server vs application server vs database server')
   * [Dotnet Application](#Dotnet Application)
   * [Nodejs Application](#Nodejs Application)
   * [Java Application](#Java Application)
@@ -20,10 +20,10 @@
 
 
 
-## Basic Software Concepts
+## 'Basic Software Concepts'
 
 
-### web server vs application server vs database server
+### 'web server vs application server vs database server'
 
 Web Server -
 
