@@ -1,5 +1,5 @@
-- [Basic Security Concepts](#Basic Security Concepts)
-  * [Certificate setup](#Certificate setup)
+- [Basic Security Concepts](#BasicSecurityConcepts)
+  * [Certificate setup](#CertificateSetup)
   * [service mesh in service to service communication ex gRPC Protocol](#service mesh in service to service communication ex gRPC Protocol)
  
 - [Basic Software Concepts](#Basic Software Concepts)
@@ -13,10 +13,10 @@
   
 
 
-## Basic Security Concepts
+## BasicSecurityConcepts
 
 
-### Certificate setup
+### CertificateSetup
 
 
 
