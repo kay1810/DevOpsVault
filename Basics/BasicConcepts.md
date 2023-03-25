@@ -2,7 +2,7 @@
   * [Certificate setup](#CertificateSetup)
   * [service mesh in service to service communication ex gRPC Protocol](#service mesh in service to service communication ex gRPC Protocol)
  
-- [Basic Software Concepts](#'Basic Software Concepts')
+- [Basic Software Concepts](https://github.com/kay1810/DevOpsVault/blob/main/Basics/BasicConcepts.md#basic-software-concepts)
   * [web server vs application server vs database server](#'web server vs application server vs database server')
   * [Dotnet Application](#Dotnet Application)
   * [Nodejs Application](#Nodejs Application)
@@ -20,10 +20,10 @@
 
 
 
-## 'Basic Software Concepts'
+## Basic Software Concepts
 
 
-### 'web server vs application server vs database server'
+### web server vs application server vs database server
 
 Web Server -
 
