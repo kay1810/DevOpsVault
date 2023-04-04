@@ -130,6 +130,33 @@ Refer below
 
 ## Process management: Understanding how to manage Linux processes, including listing running processes, sending signals, and killing processes.
 
+A process in Linux is nothing but a program in execution. It’s a running instance of a program. Any command that you execute starts a process.
+![image](https://user-images.githubusercontent.com/29191813/229857998-997275f7-c3ca-4bc6-8aa4-6446220170c0.png)
+
+![image](https://user-images.githubusercontent.com/29191813/229858088-ebdb7de2-6197-4cd0-b7cb-cbf4c67241c7.png)
+
+- Top command displays a list of processes that are running in real-time along with their memory and CPU usage
+- ps command is short for ‘Process Status’. It displays the currently-running processes. However, unlike the top command, the output generated is not in realtime. To get more information using ps command use: ps -u 
+
+
+![image](https://user-images.githubusercontent.com/29191813/229858502-6a4a3f33-369d-464d-8481-d0441bcc0f94.png)
+
+![image](https://user-images.githubusercontent.com/29191813/229858595-8b561427-71d6-4450-adde-d861de66f31d.png)
+
+- Stop a process
+To stop a process in Linux, use the 'kill’ command. kill command sends a signal to the process.
+
+There are different types of signals that you can send. However, the most common one is ‘kill -9’ which is ‘SIGKILL’.
+
+![image](https://user-images.githubusercontent.com/29191813/229858821-0c4f9bd3-9770-41b3-8258-0d72b5d34ffb.png)
+
+![image](https://user-images.githubusercontent.com/29191813/229858927-07b41a9c-b05c-42bd-ac78-2e839b28f3fa.png)
+
+![image](https://user-images.githubusercontent.com/29191813/229859492-ed1a99ba-3471-4ea0-8067-74149bf80bc2.png)
+
+![image](https://user-images.githubusercontent.com/29191813/229859331-2da37ad0-c5fd-48c7-851b-a4b9dbb9e929.png)
+
+
 ## Bash scripting: Familiarity with basic Bash scripting concepts, including variables, loops, conditional statements, and command-line arguments.
 
 ## System logs: Understanding system logging mechanisms and being able to analyze log files for troubleshooting purposes.
