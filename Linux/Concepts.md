@@ -44,13 +44,54 @@
 
 
 ## Users and Groups: Creating and managing users and groups, understanding the difference between system and regular users.
+
+
 ## Permissions: Understanding Linux file permissions and ownership, including how to modify them using chmod, chown, and chgrp commands.
+
+File permissions : 
+User: the owner of the file (person who created the file).
+Group: the group can contain multiple users. Therefore, all users in that group will have the same permissions. It makes things easier than assign permission for every user you want.
+Other: any person has access to that file, that person has neither created the file, nor are they in any group which has access to that file.
+Example :
+![image](https://user-images.githubusercontent.com/29191813/229854103-61c284f7-7db4-4d17-b83f-8b80ac281d7b.png)
+“-rw-r–r–”. 
+‘r’ = read.
+‘w’ = write.
+‘x’ = execute.
+‘-’ = no permission.
+
+![image](https://user-images.githubusercontent.com/29191813/229854259-5633da32-8f44-49b7-9f7d-ac4c60c8df69.png)
+the empty first part means that it is a file. If it were a directory then it will be the letter “d” instead. The second part means that the user “Home” has read and write permissions but he does not have the execute one. The group and others have only the read permission.
+![image](https://user-images.githubusercontent.com/29191813/229854449-e589343d-170a-4a4d-bfbf-9236e2c0a705.png)
+![image](https://user-images.githubusercontent.com/29191813/229854497-6749908b-84e0-4192-8abe-2226bcb6e319.png)
+Then the permissions will be: -rwxrwxrwx.
+
+ remove the execute from the group and the write from other by:
+
+chmod 765 section.txt
+The permissions will be: -rwxrw-r-x.
+![image](https://user-images.githubusercontent.com/29191813/229855463-dd9b5c2a-0b00-478b-b871-76a81440e79c.png)
+
+![image](https://user-images.githubusercontent.com/29191813/229855077-4616e445-6f1b-4c9d-bdc4-aeaa2c07b24c.png)
+
+
 ## Package management: Familiarity with RPM and Yum package management systems, including how to install, remove, and update packages.
+Refer below 
+
 ## Network configuration: Configuring network interfaces, setting IP addresses, configuring routing, understanding DNS, and troubleshooting network issues.
+
+
 ## Services and daemons: Managing and troubleshooting Linux services and daemons, including starting, stopping, and restarting them.
+Refer below 
+
+
 ## Process management: Understanding how to manage Linux processes, including listing running processes, sending signals, and killing processes.
+
 ## Bash scripting: Familiarity with basic Bash scripting concepts, including variables, loops, conditional statements, and command-line arguments.
+
 ## System logs: Understanding system logging mechanisms and being able to analyze log files for troubleshooting purposes.
+
+
 ## Security: Basic understanding of Linux security concepts, including securing SSH, using firewalls, and managing users with sudo access.
 
 
