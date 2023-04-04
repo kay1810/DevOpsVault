@@ -60,11 +60,11 @@ Once a user has been created with their primary group, they can be added to seco
 - Creating and Deleting User Accounts
 To create a new standard user, use the useradd command. The syntax is as follows:
 
-useradd <name>
+useradd name
  
 You need to set a password for the new user by using the passwd command. Note, you need root privileges to change a user password. The syntax is as follows:
 
-passwd <username>
+passwd username
  
  The user is be able to change their password at any time using the passwd command with the syntax. Below is an example:
 
@@ -77,12 +77,12 @@ passwd: password updated successfully
  
 - To remove a user account, enter the following command:
 
-userdel <name>
+userdel name
 Issuing the command above only deletes the user’s account. Their files and home directory are not be deleted.
 
 To remove the user, their home folder, and their files, use this command:
 
-userdel -r <name>
+userdel -r name
 
 ## Permissions: Understanding Linux file permissions and ownership, including how to modify them using chmod, chown, and chgrp commands.
 
