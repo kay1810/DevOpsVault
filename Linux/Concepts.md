@@ -1,3 +1,4 @@
+# General Concepts
 - Filesystem hierarchy: Understanding the Linux filesystem hierarchy, including the purpose of each directory such as /etc, /bin, /usr, /var, etc.
 - Users and Groups: Creating and managing users and groups, understanding the difference between system and regular users.
 - Permissions: Understanding Linux file permissions and ownership, including how to modify them using chmod, chown, and chgrp commands.
@@ -9,7 +10,8 @@
 - System logs: Understanding system logging mechanisms and being able to analyze log files for troubleshooting purposes.
 - Security: Basic understanding of Linux security concepts, including securing SSH, using firewalls, and managing users with sudo access.
 
-- RHEL Specific : 
+
+#  RHEL Specific : 
 
 - All software on a Red Hat Enterprise Linux system is divided into RPM packages, which are stored in particular repositories. When a system is subscribed to the Red Hat Content Delivery Network, a repository file is created in the /etc/yum.repos.d/ directory
 - Listing all available repositories:
