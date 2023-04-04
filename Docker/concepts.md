@@ -2,6 +2,7 @@
 
 Docker makes use of a client-server architecture. The Docker client talk with the docker daemon which helps in building, running, and distributing the docker containers. The Docker client run with the daemon on the same system or we can connect the docker client with the docker daemon remotely. With the help of REST API over a  UNIX socket or a network, the docker client and daemon interact with each other. 
 
+
 ![image](https://user-images.githubusercontent.com/29191813/229864265-bcfa7b8d-b787-4c30-9f9e-e2d2fe37f706.png)
 
 Docker Daemon
@@ -79,6 +80,7 @@ macvlan: This network assigns MAC(Media Access control) address to the container
 ## Docker swarm
 ## Security in Docker
 ## Troubleshooting
+
 
 **Docker EcoSystem**
 ![image](https://user-images.githubusercontent.com/29191813/225827998-c45deb18-992e-42db-847a-29418893c71b.png)
