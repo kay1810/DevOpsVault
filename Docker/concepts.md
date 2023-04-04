@@ -20,10 +20,9 @@ Server: It is the docker daemon called dockerd. It can create and manage docker 
 Rest API: It is used to instruct docker daemon what to do.
 Command Line Interface (CLI): It is a client which is used to enter docker commands.
 
-###  Docker Engine REST API: The Docker API allows the Docker Engine to be controlled by other applications. They can use it to query information about containers or images, manage or upload images, or perform actions such as creating new containers. This function is accessed through a web service called HTTP client.
+### Docker Engine REST API: The Docker API allows the Docker Engine to be controlled by other applications. They can use it to query information about containers or images, manage or upload images, or perform actions such as creating new containers. This function is accessed through a web service called HTTP client.
 
 ### Docker CLI: A command-line tool used for interacting with the Docker daemon. This is one of the key reasons why people like to use Docker in the developer environment.
-
 
 ### Docker Host
 A Docker host is a type of machine which is responsible for running more than one container. It comprises of the Docker daemon, Images, Containers, Networks, and Storage.
