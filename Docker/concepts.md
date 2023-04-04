@@ -56,6 +56,7 @@ An image contains instructions for creating a docker container. It is just a rea
 Containers
 Containers are created from docker images as they are ready applications. With the help of Docker API or CLI, we can start, stop, delete or move a container. A container can access only those resources which are defined in the image unless additional access is defined during the building of an image in the container.
 
+### Docker file - In depth
 
 ![image](https://user-images.githubusercontent.com/29191813/229868215-0d480711-4278-4ca3-8d05-69127deda0ff.png)
 ![image](https://user-images.githubusercontent.com/29191813/229868303-040d29cf-133e-4654-bb6a-9a0d9e878837.png)
@@ -68,6 +69,10 @@ Containers are created from docker images as they are ready applications. With t
 ![image](https://user-images.githubusercontent.com/29191813/229868924-50a7123f-2358-4001-b139-563c74540e59.png)
 ![image](https://user-images.githubusercontent.com/29191813/229869017-93c2bb7e-1cde-4c7e-a5c7-80be26c5f6d2.png)
 ![image](https://user-images.githubusercontent.com/29191813/229869071-931bf1b3-7ca8-49a0-9293-18471bca119e.png)
+
+Sample Docker file to install nginx :
+
+![image](https://user-images.githubusercontent.com/29191813/229869882-4368f325-047c-4fe0-bde5-f05978745ace.png)
 
 
 ## Docker volume
