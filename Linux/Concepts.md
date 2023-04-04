@@ -42,3 +42,16 @@ yum remove package_name
 - Listing information on all installed packages:
 
 yum list installed
+
+- Service Related :
+
+![image](https://user-images.githubusercontent.com/29191813/229847019-40be5536-ad10-463e-a389-a4facea9f5c9.png)
+![image](https://user-images.githubusercontent.com/29191813/229847130-c1c7db0e-25b1-4989-95a1-b426b9256125.png)
+![image](https://user-images.githubusercontent.com/29191813/229847330-b1163ac9-70e3-4651-97a1-236888ced6f0.png)
+![image](https://user-images.githubusercontent.com/29191813/229847693-d7b38a6b-b60e-40f7-b0af-f12328b1a694.png)
+![image](https://user-images.githubusercontent.com/29191813/229847761-101d4530-2595-4b6d-9c34-72d41a8f020f.png)
+
+
+
+
+
