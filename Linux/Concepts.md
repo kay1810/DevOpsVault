@@ -2,6 +2,7 @@
 - Filesystem hierarchy: Understanding the Linux filesystem hierarchy, including the purpose of each directory such as /etc, /bin, /usr, /var, etc.
 
 ![image](https://user-images.githubusercontent.com/29191813/229850564-8fb9a5c1-761f-4aee-9e66-2b06f4997143.png)
+
 1.In the FHS, Filesystem Hierarchy Standard, all files and directories appear under the root directory /, even if they are stored on different physical or virtual devices.
  -Every single file and directory starts from the root directory
  -The only root user has the right to write under this directory
