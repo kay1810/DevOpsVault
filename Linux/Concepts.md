@@ -45,6 +45,44 @@
 
 ## Users and Groups: Creating and managing users and groups, understanding the difference between system and regular users.
 
+- Linux Primary Groups
+A primary group is the default group that a user account belongs to. Every user on Linux belongs to a primary group. A user’s primary group is usually the group that is recorded in your Linux system’s /etc/passwd file. When a Linux user logs into their system, the primary group is usually the default group associated with the logged in account.
+
+You can find a user’s primary group ID by viewing the contents of the your system’s /etc/passwd file.
+
+![image](https://user-images.githubusercontent.com/29191813/229856169-c2263b08-68be-45d5-b722-139a045f4134.png)
+
+- Linux Secondary Groups
+Once a user has been created with their primary group, they can be added to secondary groups. Linux system users can have a maximum of 15 secondary groups. A Linux system’s groups are stored in the /etc/group file.
+
+![image](https://user-images.githubusercontent.com/29191813/229856309-efd75a0e-10c2-45a4-8618-ac6a14c13f5b.png)
+
+- Creating and Deleting User Accounts
+To create a new standard user, use the useradd command. The syntax is as follows:
+
+useradd <name>
+ 
+You need to set a password for the new user by using the passwd command. Note, you need root privileges to change a user password. The syntax is as follows:
+
+passwd <username>
+ 
+ The user is be able to change their password at any time using the passwd command with the syntax. Below is an example:
+
+$ passwd
+Changing password for lmartin.
+(current) UNIX password:
+Enter new UNIX password:
+Retype new UNIX password:
+passwd: password updated successfully
+ 
+- To remove a user account, enter the following command:
+
+userdel <name>
+Issuing the command above only deletes the user’s account. Their files and home directory are not be deleted.
+
+To remove the user, their home folder, and their files, use this command:
+
+userdel -r <name>
 
 ## Permissions: Understanding Linux file permissions and ownership, including how to modify them using chmod, chown, and chgrp commands.
 
@@ -148,7 +186,9 @@ Computer security is the protection of computer systems from the theft or damage
 A firewall is a network security system that monitors and controls the incoming and outgoing network traffic based on predetermined security rules. A firewall typically establishes a barrier between a trusted, secure internal network and another outside network.
 
 On Red Hat Enterprise Linux 7, the firewall is provided by the firewalld service, which is automatically enabled during the installation of Red Hat Enterprise Linux.
+ 
 ![image](https://user-images.githubusercontent.com/29191813/229848488-f770fb34-a0a9-4538-887a-493c6d2df3dc.png)
+ 
 
 - Establishing an SSH Connection
 Generate a public and a private key:  ssh-keygen
