@@ -13,32 +13,32 @@
 - All software on a Red Hat Enterprise Linux system is divided into RPM packages, which are stored in particular repositories. When a system is subscribed to the Red Hat Content Delivery Network, a repository file is created in the /etc/yum.repos.d/ directory
 - Listing all available repositories:
 
-~]# subscription-manager repos --list
-Listing all currently enabled repositories:
+ subscription-manager repos --list
+- Listing all currently enabled repositories:
 
-~]$ yum repolist
-Enabling or disabling a repository:
+ yum repolist
+- Enabling or disabling a repository:
 
-~]# subscription-manager repos --enable repository
-~]# subscription-manager repos --disable repository
-Searching for packages matching a specific string:
+subscription-manager repos --enable repository
+ subscription-manager repos --disable repository
+- Searching for packages matching a specific string:
 
-~]$ yum search string
-Installing a package:
+ yum search string
+- Installing a package:
 
-~]# yum install package_name
-Updating all packages and their dependencies:
+yum install package_name
+- Updating all packages and their dependencies:
 
-~]# yum update
-Updating a package:
+yum update
+- Updating a package:
 
-~]# yum update package_name
-Uninstalling a package and any packages that depend on it:
+yum update package_name
+- Uninstalling a package and any packages that depend on it:
 
-~]# yum remove package_name
-Listing information on all installed and available packages:
+yum remove package_name
+- Listing information on all installed and available packages:
 
-~]$ yum list all
-Listing information on all installed packages:
+ yum list all
+- Listing information on all installed packages:
 
-~]$ yum list installed
+yum list installed
