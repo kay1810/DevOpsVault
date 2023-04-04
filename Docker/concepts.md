@@ -34,13 +34,40 @@ All the docker images are stored in the docker registry. There is a public regis
 Whenever we are using a docker, we are creating and use images, containers, volumes, networks and other objects. 
 
 ## Docker States
+
+What is Docker Container Lifecycle?
+A container is a process in OS. A process is an instance of a computer program that is being executed. But container processes are different. Container processes are fully-functional environments, and they have more isolation from the OS than the processes in OS
+
+![image](https://user-images.githubusercontent.com/29191813/229866655-b55a90e7-a408-433f-b1dc-4c60c6d759dc.png)
+
+By default, the docker ps command displays the current state of all the Docker containers:
+
+![image](https://user-images.githubusercontent.com/29191813/229867374-515b02aa-4c81-4be4-8758-486eb28bac25.png)
+
+
 ## Docker file, Image & Container
+
+Docker file
+Docker can build images automatically by reading the instructions from a Dockerfile. A Dockerfile is a text document that contains all the commands a user could call on the command line to assemble an image. This page describes the commands you can use in a Dockerfile.
 
 Images
 An image contains instructions for creating a docker container. It is just a read-only template. It is used to store and ship applications. Images are an important part of the docker experience as they enable collaboration between developers in any way which is not possible earlier.
 
 Containers
 Containers are created from docker images as they are ready applications. With the help of Docker API or CLI, we can start, stop, delete or move a container. A container can access only those resources which are defined in the image unless additional access is defined during the building of an image in the container.
+
+
+![image](https://user-images.githubusercontent.com/29191813/229868215-0d480711-4278-4ca3-8d05-69127deda0ff.png)
+![image](https://user-images.githubusercontent.com/29191813/229868303-040d29cf-133e-4654-bb6a-9a0d9e878837.png)
+![image](https://user-images.githubusercontent.com/29191813/229868378-03cd498b-f786-4817-8cc1-2be9f98a79a8.png)
+![image](https://user-images.githubusercontent.com/29191813/229868436-b2aabab0-1df1-4af1-95bd-0c062aa97d5e.png)
+![image](https://user-images.githubusercontent.com/29191813/229868527-81dc7986-459d-4a8b-90e5-374d3b713110.png)
+![image](https://user-images.githubusercontent.com/29191813/229868604-b92d36b6-39f3-4e0a-b618-8c0f414ff5a5.png)
+![image](https://user-images.githubusercontent.com/29191813/229868697-f2d574f9-e2b4-40ef-8195-93d967475f88.png)
+![image](https://user-images.githubusercontent.com/29191813/229868850-519b4476-36ec-4a01-862f-b39521cac712.png)
+![image](https://user-images.githubusercontent.com/29191813/229868924-50a7123f-2358-4001-b139-563c74540e59.png)
+![image](https://user-images.githubusercontent.com/29191813/229869017-93c2bb7e-1cde-4c7e-a5c7-80be26c5f6d2.png)
+![image](https://user-images.githubusercontent.com/29191813/229869071-931bf1b3-7ca8-49a0-9293-18471bca119e.png)
 
 
 ## Docker volume
