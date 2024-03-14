@@ -1,0 +1,28 @@
+ main.tf
+
+provider "aws" {
+ region = "us-east-2"
+}
+
+syntax for creating a resource in Terraform is:
+resource "<PROVIDER>_<TYPE>" "<NAME>" {
+ [CONFIG ...]
+}
+
+run terraform init (idempotent cmd) to tell Terraform to scan the code, figure out which providers you’re using, and download the code for them.
+By default, the provider code will be downloaded into a .terraform folder, which is Terraform’s scratch directory (you may want to
+add it to .gitignore). 
+Terraform will also record information about the provider code it downloaded into a .terraform.lock.hcl file
+
+terraform plan command lets you see what Terraform will do before actually making any changes. This is a great way to sanity check your code
+anything with a plus sign (+) will be created, anything with a minus sign (–) will be deleted, and anything with a tilde sign (~) will be modified in place
+
+git add main.tf .terraform.lock.hcl
+git commit -m "Initial commit"
+You should also create a .gitignore file with the following contents:
+.terraform
+*.tfstate
+*.tfstate.backup
+
+git add .gitignore
+git commit -m "Add a .gitignore file
