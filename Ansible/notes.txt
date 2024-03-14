@@ -1,0 +1,4 @@
+ Ansible to configure all five servers in parallel. Alternatively, by setting a parameter called
+serial in the playbook, you can do a rolling deployment, which updates the servers in batches. For example,
+setting serial to 2 directs Ansible to update two of the servers at a time, until all five are done
+
