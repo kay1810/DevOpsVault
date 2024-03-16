@@ -88,3 +88,5 @@ $ terraform output
 public_ip = "54.174.13.5" 
 or
  terraform output public_ip
+
+Terraform records information about what infrastructure it created in a Terraform state file
