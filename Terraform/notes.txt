@@ -26,3 +26,65 @@ You should also create a .gitignore file with the following contents:
 
 git add .gitignore
 git commit -m "Add a .gitignore file
+
+to access output from some other part:
+<PROVIDER>_<TYPE>.<NAME>.<ATTRIBUTE>
+
+resource "aws_security_group" "sg1" {
+ name = "terraform-example-instance"
+ ingress {
+ from_port = 8080
+ to_port = 8080
+ protocol = "tcp"
+ cidr_blocks = ["0.0.0.0/0"]
+ }
+}
+
+aws_security_group.sg1.id
+
+
+implicit dependency :
+resource "aws_instance" "example" {
+ ami = "ami-0fb653ca2d3203ac1"
+ instance_type = "t2.micro"
+ vpc_security_group_ids = [aws_security_group.sg1.id]
+ user_data = <<-EOF
+ #!/bin/bash
+ echo "Hello, World" > index.html
+ nohup busybox httpd -f -p 8080 &
+ EOF
+ user_data_replace_on_change = true
+ tags = {
+ Name = "terraform-example"
+ }
+}
+
+pass variable :
+terraform plan -var "server_port=8080"
+or
+$ export TF_VAR_server_port=8080
+$ terraform plan
+or
+variable "server_port" {
+ description = "The port the server will use for HTTP requests"
+ type = number
+ default = 8080
+}
+
+and to use
+resource "aws_security_group" "instance" {
+ name = "terraform-example-instance"
+ ingress {
+ from_port = var.server_port
+ to_port = var.server_port
+ protocol = "tcp"
+ cidr_blocks = ["0.0.0.0/0"]
+ }
+}
+
+use the terraform output command to list all outputs
+without applying any changes:
+$ terraform output
+public_ip = "54.174.13.5" 
+or
+ terraform output public_ip
