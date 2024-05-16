@@ -1,7 +1,7 @@
 ## For Practice ##
 
 * Check status of service in local and remote servers
-* Replace config file in remote servers
+* Replace config file in remote servers, use ps session
 * install module
 * Create new module
 * get disk space in remote servers and send mail as csv
@@ -18,4 +18,7 @@
 * start/stop service in remote servers
 * change service account login for service in remote servers
 * add new user to remote servers
-*  clear old files older than specific time to free up space 
+*  clear old files older than specific time to free up space
+*  network test to url
+*  read json/csv
+*  write to csv
