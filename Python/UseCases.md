@@ -1,6 +1,7 @@
 ## For Practice ##
 
 https://edu.anarcho-copy.org/Programming%20Languages/Python/Automate%20the%20Boring%20Stuff%20with%20Python.pdf
+https://www.youtube.com/playlist?list=PLUDwpEzHYYLv0iZsTx4dm-v-icoVXRqrz
 
 * Check status of service in local and remote servers
 * Replace config file 
