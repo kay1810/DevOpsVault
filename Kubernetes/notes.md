@@ -114,26 +114,8 @@ Liveness health checks run application-specific logic, like loading
 a web page, to verify that the application is not just still running, but is
 functioning properly. Since these liveness health checks are applicationspecific, you have to define them in your Pod manifest.
 
-apiVersion: v1
-kind: Pod
-metadata:
- name: kuard
-spec:
- containers:
- - image: gcr.io/kuar-demo/kuard-amd64:blue
- name: kuard
- livenessProbe:
- httpGet:
- path: /healthy
- port: 8080
- initialDelaySeconds: 5
- timeoutSeconds: 1
- periodSeconds: 10
- failureThreshold: 3
- ports:
- - containerPort: 8080
- name: http
- protocol: TCP
+![image](https://github.com/kay1810/DevOpsVault/assets/29191813/81014259-28e9-4eaf-ac63-4a9b79e78f4f)
+
 The preceding Pod manifest uses an httpGet probe to perform an HTTP
 GET request against the /healthy endpoint on port 8080 of the kuard
 container.
@@ -153,3 +135,4 @@ requests specify the minimum amount of a resource required to run the
 application. Resource limits specify the maximum amount of a resource that
 an application can consume
 
+![image](https://github.com/kay1810/DevOpsVault/assets/29191813/b1d4d401-3cc0-4c50-af43-b981d8ca78c6)
