@@ -138,3 +138,76 @@ an application can consume
 ![image](https://github.com/kay1810/DevOpsVault/assets/29191813/b1d4d401-3cc0-4c50-af43-b981d8ca78c6)
 
 
+Using Volumes with Pods
+To add a volume to a Pod manifest, there are two new stanzas to add to our
+configuration. The first is a new spec.volumes section. This array
+defines all of the volumes that may be accessed by containers in the Pod
+manifest
+The second addition is the
+volumeMounts array in the container definition. This array defines the
+volumes that are mounted into a particular container, and the path where
+each volume should be mounted.
+![image](https://github.com/kay1810/DevOpsVault/assets/29191813/55f7a538-fbb7-4314-8787-735ebae7c348)
+
+Labels are key/value pairs that can be attached to Kubernetes objects such
+as Pods and ReplicaSets.  useful for attaching
+identifying information to Kubernetes objects. 
+
+Annotations, on the other hand, provide a storage mechanism that resembles
+labels: key/value pairs designed to hold nonidentifying information that
+tools and libraries can leverage.
+
+Modifying Labels
+You can also apply or update labels on objects after you create them
+created:
+$ kubectl label deployments alpaca-test "canary=true"
+
+You can also use the -L option to kubectl get to show a label value as
+a column:
+$ kubectl get deployments -L canary
+$ kubectl get pods --show-labels
+
+You can remove a label by applying a dash-suffix:
+$ kubectl label deployments alpaca-test "canary-"
+
+If we only want to list Pods that have the ver label set to 2, we could use
+the --selector flag:
+$ kubectl get pods --selector="ver=2"
+kubectl get pods --selector="app=bandicoot,ver=2"
+$ kubectl get deployments --selector="canary"
+
+The selector app=alpaca,ver=1 would be represented like this:
+selector:
+ app: alpaca
+ ver: 1
+
+
+
+For example, ReplicaSets, which create and maintain multiple replicas of a
+Pod, find the Pods that they are managing via a selector. Likewise, a service
+load balancer finds the Pods to which it should bring traffic via a selector
+query. When a Pod is created, it can use a node selector to identify a
+particular set of nodes onto which it can be scheduled. When people want to
+restrict network traffic in their cluster, they use NetworkPolicy in
+conjunction with specific labels to identify Pods that should or should not
+be allowed to communicate with each other.
+
+Annotations
+Annotations provide a place to store additional metadata for Kubernetes
+objects where the sole purpose of the metadata is assisting tools and
+libraries
+Annotations can be used for the
+tool itself or to pass configuration information between external systems.
+
+Annotations are used in various places in Kubernetes, with the primary use
+case being rolling deployments. During rolling deployments, annotations
+are used to track rollout status and provide the necessary information
+required to roll back a deployment to a previous state.
+
+![image](https://github.com/kay1810/DevOpsVault/assets/29191813/a892622f-7920-42c8-a1c8-ecf4ff282b1d)
+
+
+
+What Is Service Discovery?
+ Service-discovery tools help solve the problem of finding which
+processes are listening at which addresses for which services
