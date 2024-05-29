@@ -70,3 +70,86 @@ number of cores). Similarly, this command:
 kubectl top pods
 will show all Pods and their resource usage. By default it only displays Pods in the current namespace, but you can add the --all-namespaces
 flag to see resource usage by all Pods in the cluster.
+
+Cluster Management
+The kubectl tool can also be used to manage the cluster itself. The most common action that people take to manage their cluster is to cordon and drain a particular node. When you cordon a node you prevent future Pods from being scheduled onto that machine. When you drain a node, you remove any Pods that are currently running on that machine. A good example use case for these commands would be removing a physical machine for repairs or upgrades.
+
+The Pod Manifest
+Pods are described in a Pod manifest., which is just a text-file representation
+of the Kubernetes API object The Kubernetes API server accepts and processes Pod manifests before
+storing them in persistent storage (etcd). The scheduler also uses the
+Kubernetes API to find Pods that haven’t been scheduled to a node It then
+places the Pods onto nodes depending on the resources and other constraints
+expressed in the Pod manifests. 
+
+Listing Pods
+kubectl get pods
+kubectl describe pods kuard
+
+Deleting a Pod
+When it is time to delete a Pod, you can delete it either by name:
+$ kubectl delete pods/kuard 
+or 
+kubectl delete -f kuard-pod.yaml
+
+
+When a Pod is deleted, it is not immediately killed. Instead, if you run
+kubectl get pods, you will see that the Pod is in the Terminating
+state. All Pods have a termination grace period. By default, this is 30
+seconds. When a Pod is transitioned to Terminating it no longer
+receives new requests. In a serving scenario, the grace period is important
+for reliability because it allows the Pod to finish any active requests that it
+may be in the middle of processing before it is terminated.
+The
+kubectl logs command downloads the current logs from the running instance:
+$ kubectl logs kuard
+The kubectl logs command always tries to get logs from the currently
+running container. Adding the --previous flag will get logs from a
+previous instance of the container. This is useful, for example, if your
+containers are continuously restarting due to a problem at container startup.
+
+Health Checks
+
+Liveness health checks run application-specific logic, like loading
+a web page, to verify that the application is not just still running, but is
+functioning properly. Since these liveness health checks are applicationspecific, you have to define them in your Pod manifest.
+
+apiVersion: v1
+kind: Pod
+metadata:
+ name: kuard
+spec:
+ containers:
+ - image: gcr.io/kuar-demo/kuard-amd64:blue
+ name: kuard
+ livenessProbe:
+ httpGet:
+ path: /healthy
+ port: 8080
+ initialDelaySeconds: 5
+ timeoutSeconds: 1
+ periodSeconds: 10
+ failureThreshold: 3
+ ports:
+ - containerPort: 8080
+ name: http
+ protocol: TCP
+The preceding Pod manifest uses an httpGet probe to perform an HTTP
+GET request against the /healthy endpoint on port 8080 of the kuard
+container.
+
+
+
+Kubernetes makes a distinction between liveness and readiness. Liveness
+determines if an application is running properly. Containers that fail
+liveness checks are restarted. Readiness describes when a container is ready
+to serve user requests. Containers that fail readiness checks are removed
+from service load balancers. Readiness probes are configured similarly to
+liveness probes.
+
+
+Kubernetes allows users to specify two different resource metrics. Resource
+requests specify the minimum amount of a resource required to run the
+application. Resource limits specify the maximum amount of a resource that
+an application can consume
+
