@@ -27,7 +27,7 @@
 - Latency
 - Bandwidth utilization
 
-
+### Additional Terms - Application Metrics
 -   Observability: Although not strictly defined, observability is a general term used to describe processes and techniques related to increasing awareness and visibility into systems. This can include monitoring, metrics, visualization, tracing, and log analysis.
 -   Resource: In the context of monitoring and software systems, a resource is any exhaustible or limited dependency. What is considered a resource can vary greatly based on part of the system being discussed.
 -   Latency: Latency is a measure of the time it takes to complete an action. Depending on the component, this can be a measure of processing, response, or travel time.
