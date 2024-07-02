@@ -7,22 +7,22 @@
 - Alerting is the responsive component of a monitoring system that performs actions based on changes in metric values. Alerts definitions are composed of two components: a metrics-based condition or threshold, and an action to perform when the values fall outside of the acceptable conditions
 - While notifying responsible parties is the most common action for alerting, some programmatic responses can be triggered based on threshold violations as well. For instance, an alert that indicates that you need more CPU to process the current load can be responded to with a script that auto-scales that layer of your application.
 
-###Host-Based Metrics
-CPU
-Memory
-Disk space
-Processes
+### Host-Based Metrics
+- CPU
+- Memory
+- Disk space
+- Processes
 
-###Application Metrics
-Error and success rates
-Service failures and restarts
-Performance and latency of responses
-Resource usage
+### Application Metrics
+- Error and success rates
+- Service failures and restarts
+- Performance and latency of responses
+- Resource usage
 
-###Network and Connectivity Metrics
--important gauges of outward-facing availability, but are also essential in ensuring that services are accessible to other machines for any systems that span more than one machine
+### Network and Connectivity Metrics
+- important gauges of outward-facing availability, but are also essential in ensuring that services are accessible to other machines for any systems that span more than one machine
 
-Connectivity
-Error rates and packet loss
-Latency
-Bandwidth utilization
+- Connectivity
+- Error rates and packet loss
+- Latency
+- Bandwidth utilization
