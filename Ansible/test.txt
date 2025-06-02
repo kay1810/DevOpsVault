@@ -1,0 +1,157 @@
+---
+- name: Install Java on servers
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: Install Java on RedHat/CentOS
+      yum:
+        name: java-1.8.0-openjdk
+        state: present
+      when: ansible_os_family == "RedHat"
+
+    - name: Install Java on Debian/Ubuntu
+      apt:
+        name: openjdk-8-jdk
+        state: present
+        update_cache: yes
+      when: ansible_os_family == "Debian"
+
+===========================================================
+
+- hosts: all
+  become: yes
+  tasks:
+    - name: Install Java (RedHat)
+      yum: name=java-1.8.0-openjdk state=present
+      when: ansible_os_family == "RedHat"
+    - name: Install Java (Debian)
+      apt: name=openjdk-8-jdk state=present update_cache=yes
+      when: ansible_os_family == "Debian"
+
+
+-===========================================
+inventonry with jumpbox 
+[all]
+app1 ansible_host=10.0.1.10
+app2 ansible_host=10.0.1.11
+
+[all:vars]
+ansible_ssh_common_args='-o ProxyCommand="ssh -W %h:%p -q user@jumpbox"'
+=================================================================
+Restart servers via adhoc command
+ansible all -i inventory -m reboot --become
+===========================================================
+
+replace content in config file and update permission
+- name: Replace config and set permissions
+  hosts: all
+  become: yes
+  tasks:
+    - copy: src=my.conf dest=/etc/myapp/my.conf owner=myuser group=mygroup mode=0644
+
+========================================================
+edit java home in properties file and restart TCE agent service
+- name: Update JAVA_HOME and restart agent
+  hosts: all
+  become: yes
+  tasks:
+    - lineinfile:
+        path: /opt/teamcity/agent/conf/buildAgent.properties
+        regexp: '^JAVA_HOME='
+        line: 'JAVA_HOME=/usr/lib/jvm/java-8-openjdk'
+      notify: Restart TCE agent
+
+  handlers:
+    - name: Restart TCE agent
+      service: name=teamcity-agent state=restarted
+====================================================================
+check space and get report ?
+- name: Check disk space
+  hosts: all
+  tasks:
+    - shell: df -h
+      register: disk
+    - debug: var=disk.stdout_lines
+==================================================
+
+upgrade existing tool, rollback of tool
+- name: Upgrade tool
+  yum: name=mytool state=latest
+- name: Rollback tool
+  yum: name=mytool-1.2.3 state=present
+
+==============================================
+Install nginx and start service,use handler
+- hosts: all
+  become: yes
+  tasks:
+    - name: Install nginx
+      yum: name=nginx state=present
+      notify: Start nginx
+  handlers:
+    - name: Start nginx
+      service: name=nginx state=started enabled=yes
+
+===============================================
+Install git / Update git in agents
+- name: Install/Update git
+  hosts: all
+  become: yes
+  tasks:
+    - yum: name=git state=latest
+
+=======================================
+
+copy a file to servers (playbook & adhoc)
+- copy: src=foo.txt dest=/tmp/foo.txt
+ansible all -m copy -a "src=foo.txt dest=/tmp/foo.txt"
+
+=========================================
+copy key to server
+- authorized_key:
+    user: myuser
+    state: present
+    key: "{{ lookup('file', 'id_rsa.pub') }}"
+============================================
+get value from vault
+vars_files:
+  - vault.yml  # Encrypted with ansible-vault
+==================================================
+install Teamcity agent software - use vault,handler, variables
+- hosts: agents
+  become: yes
+  vars_files:
+    - vault.yml
+  vars:
+    agent_url: "https://teamcity.example.com/update/buildAgent.zip"
+  tasks:
+    - get_url: url={{ agent_url }} dest=/opt/teamcity/agent.zip
+      notify: Restart agent
+  handlers:
+    - name: Restart agent
+      service: name=teamcity-agent state=restarted
+
+====================================================
+ansible role for setting up TCE agent - plays for TCE agent, java, git ,docker,python
+error handling example , logging
+Jinja2 template
+dynamic aws inventory
+variables for dev,test , prod
+cron job setup playbook
+- cron:
+    name: "cleanup"
+    minute: "0"
+    hour: "2"
+    job: "/usr/local/bin/cleanup.sh"
+==============================================
+loop, condition - install multiple tools - httpd, firewalld - https://www.youtube.com/watch?v=m3iagaNjSqw
+- name: Install tools
+  yum:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - httpd
+    - firewalld
+==========================================
+tag,callback plugins
