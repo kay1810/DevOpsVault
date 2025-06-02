@@ -149,3 +149,79 @@ foreach ($server in $servers) {
         Write-Host "ERROR on $server: $($_.Exception.Message)"
     }
 }
+
+################################################################################
+#download pkg from AF
+# Artifactory and file details
+$artifactoryUrl = "https://artifactory.example.com/artifacts/myapp.msi"  # or .exe
+$destination = "C:\Temp\myapp.msi"  # or .exe
+$apiKey = "your_artifactory_api_key"  # Use your actual API key
+
+try {
+    # Download the file from Artifactory
+    Invoke-WebRequest -Uri $artifactoryUrl -OutFile $destination -Headers @{ "X-JFrog-Art-Api" = $apiKey }
+    Write-Host "Downloaded file to $destination"
+
+    # Install the MSI or EXE silently
+    if ($destination -like "*.msi") {
+        Start-Process msiexec.exe -ArgumentList "/i `"$destination`" /qn" -Wait
+        Write-Host "MSI installation completed."
+    } elseif ($destination -like "*.exe") {
+        Start-Process $destination -ArgumentList "/S" -Wait  # /S is common for silent install; check your installer docs
+        Write-Host "EXE installation completed."
+    } else {
+        Write-Host "Unknown file type: $destination"
+    }
+}
+catch {
+    Write-Host "ERROR: $($_.Exception.Message)"
+}
+
+
+######################################################################################
+#get disk space
+# Email configuration
+$smtpServer = "smtp.example.com"
+$smtpPort = 587
+$smtpUser = "sender@example.com"
+$smtpPass = "your_password"
+$from = "sender@example.com"
+$to = "recipient@example.com"
+$subject = "Disk Space Report"
+
+# Collect disk space info for all local drives
+$results = Get-WmiObject Win32_LogicalDisk -Filter "DriveType=3" | 
+    Select-Object DeviceID, 
+                  @{Name="FreeGB";Expression={"{0:N2}" -f ($_.FreeSpace/1GB)}}, 
+                  @{Name="TotalGB";Expression={"{0:N2}" -f ($_.Size/1GB)}}
+
+# Convert results to HTML table for email body
+$body = $results | ConvertTo-Html -Property DeviceID,FreeGB,TotalGB -Title "Disk Space Report" | Out-String
+
+# Create a credential object for SMTP
+$securePass = ConvertTo-SecureString $smtpPass -AsPlainText -Force
+$credentialSmtp = New-Object System.Management.Automation.PSCredential($smtpUser, $securePass)
+
+# Send the email
+Send-MailMessage -From $from -To $to -Subject $subject -Body $body -BodyAsHtml `
+    -SmtpServer $smtpServer -Port $smtpPort -Credential $credentialSmtp -UseSsl
+
+Write-Host "Disk space report sent."
+
+###########################################
+#delete old files
+# List of folders to clean
+$folders = @(
+    "C:\Temp\logs",
+    "D:\AppData\oldfiles",
+    "E:\Backups\archive"
+)
+
+foreach ($folder in $folders) {
+    if (Test-Path $folder) {
+        Get-ChildItem -Path $folder -File | Where-Object { $_.LastWriteTime -lt (Get-Date).AddDays(-30) } | Remove-Item -Force
+        Write-Host "Cleaned files older than 30 days in $folder"
+    } else {
+        Write-Host "Folder not found: $folder"
+    }
+}
