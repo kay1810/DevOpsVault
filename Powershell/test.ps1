@@ -225,3 +225,118 @@ foreach ($folder in $folders) {
         Write-Host "Folder not found: $folder"
     }
 }
+
+##################################################
+# Read CSV file
+$data = Import-Csv -Path "C:\path\to\file.csv"
+
+# Print each row
+foreach ($row in $data) {
+    Write-Host ($row | Out-String)
+}
+
+# Read JSON file
+$json = Get-Content -Path "C:\path\to\file.json" | ConvertFrom-Json
+
+# Print each object
+foreach ($item in $json) {
+    Write-Host ($item | Out-String)
+}
+
+
+# Install the module if not already installed
+# Install-Module -Name powershell-yaml
+
+Import-Module powershell-yaml
+
+# Read YAML file
+$yaml = ConvertFrom-Yaml (Get-Content -Raw -Path "C:\path\to\file.yaml")
+
+# Print each object
+foreach ($item in $yaml) {
+    Write-Host ($item | Out-String)
+}
+###############################################
+
+# Configuration
+$csvPath = "C:\path\to\accounts.csv"   # CSV with column 'SamAccountName'
+$smtpServer = "smtp.example.com"
+$smtpPort = 587
+$smtpUser = "sender@example.com"
+$smtpPass = "your_password"
+$from = "sender@example.com"
+$to = "recipient@example.com"
+$subject = "Service Account Status Report"
+
+# Read accounts from CSV
+$accounts = Import-Csv -Path $csvPath
+
+# Prepare results
+$report = @()
+
+foreach ($acct in $accounts) {
+    $user = Get-ADUser -Identity $acct.SamAccountName -Properties LockedOut, PasswordLastSet
+    $locked = $user.LockedOut
+    $pwdChanged = $user.PasswordLastSet -gt (Get-Date).AddDays(-7)
+
+    if ($locked -or $pwdChanged) {
+        $report += [PSCustomObject]@{
+            SamAccountName   = $acct.SamAccountName
+            Locked           = $locked
+            PasswordLastSet  = $user.PasswordLastSet
+        }
+    }
+}
+
+if ($report.Count -gt 0) {
+    # Convert report to HTML for email body
+    $body = $report | ConvertTo-Html -Property SamAccountName,Locked,PasswordLastSet -Title "Service Account Status" | Out-String
+
+    # Create SMTP credential
+    $securePass = ConvertTo-SecureString $smtpPass -AsPlainText -Force
+    $credentialSmtp = New-Object System.Management.Automation.PSCredential($smtpUser, $securePass)
+
+    # Send the email
+    Send-MailMessage -From $from -To $to -Subject $subject -Body $body -BodyAsHtml `
+        -SmtpServer $smtpServer -Port $smtpPort -Credential $credentialSmtp -UseSsl
+
+    Write-Host "Report sent."
+} else {
+    Write-Host "No accounts are locked or have changed password in the last 7 days."
+}
+
+#############################################################
+Import-Module WebAdministration
+
+# Set your IIS site or application pool name
+$siteName = "YourDotNetSite"
+$appPoolName = "YourDotNetAppPool"
+
+# Check and restart IIS Site
+$site = Get-Website -Name $siteName -ErrorAction SilentlyContinue
+if ($site) {
+    if ($site.State -ne "Started") {
+        Write-Host "Site '$siteName' is $($site.State). Starting..."
+        Start-Website -Name $siteName
+        Write-Host "Site '$siteName' started."
+    } else {
+        Write-Host "Site '$siteName' is already running."
+    }
+} else {
+    Write-Host "Site '$siteName' not found."
+}
+
+# Check and restart Application Pool
+$appPool = Get-WebAppPoolState -Name $appPoolName -ErrorAction SilentlyContinue
+if ($appPool) {
+    if ($appPool.Value -ne "Started") {
+        Write-Host "App Pool '$appPoolName' is $($appPool.Value). Starting..."
+        Start-WebAppPool -Name $appPoolName
+        Write-Host "App Pool '$appPoolName' started."
+    } else {
+        Write-Host "App Pool '$appPoolName' is already running."
+    }
+} else {
+    Write-Host "App Pool '$appPoolName' not found."
+}
+
