@@ -108,6 +108,44 @@ Storage Plugins
 
 
 ##  Docker compose
+**Docker Compose** is a tool for defining and running multi-container Docker applications. It lets you describe your application’s services, networks, and volumes in a single YAML file (`docker-compose.yml`), making it easy to manage complex setups.
+
+---
+
+### **Key Features:**
+- **Multi-container orchestration:** Define and run multiple containers as a single application.
+- **Declarative configuration:** Use a YAML file to specify services, images, build instructions, ports, environment variables, volumes, and networks.
+- **Easy commands:** Start, stop, and manage all services with simple commands like `docker-compose up` and `docker-compose down`.
+
+---
+
+### **Example `docker-compose.yml`:**
+```yaml
+version: '3'
+services:
+  web:
+    image: nginx:alpine
+    ports:
+      - "8080:80"
+  app:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      - ENV=production
+```
+
+---
+
+### **How to use:**
+1. Define your services in `docker-compose.yml`.
+2. Run `docker-compose up` to start all services.
+3. Run `docker-compose down` to stop and remove them.
+
+---
+
+**Summary:**  
+Docker Compose simplifies running and managing multi-container Docker applications with a single configuration file and easy commands.
 ##  Docker registry
 ##  Docker API & CLI
 ## Environment variables in Docker
