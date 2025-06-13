@@ -41,3 +41,35 @@ COPY ./app /code/app
 
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "80"]
 
+############################################
+docker compose
+https://github.com/ramyabala221190/docker-volumes/tree/master
+
+
+version: '3.8'
+services:
+  dev:
+    build: .
+    environment:
+      - APP_ENV=dev
+      - PORT=3001
+    volumes:
+      - dev-data:/data
+    ports:
+      - "3001:3001"
+
+  uat:
+    build: .
+    environment:
+      - APP_ENV=uat
+      - PORT=3002
+    volumes:
+      - uat-data:/data
+    ports:
+      - "3002:3002"
+
+volumes:
+  dev-data:
+  uat-data:
+
+##########################
