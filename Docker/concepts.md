@@ -146,6 +146,17 @@ services:
 
 **Summary:**  
 Docker Compose simplifies running and managing multi-container Docker applications with a single configuration file and easy commands.
+
+#############
+
+Bind Mounts map a specific directory or file from the host machine into the container. The data lives on the host at the specified path, and any changes are immediately reflected in both the host and container. Bind mounts are often used in development for live code updates, but they are less portable and depend on the host’s directory structure.
+
+Volumes are managed by Docker itself and stored in Docker’s storage area (like /var/lib/docker/volumes/). They are designed for persistent and portable storage, making them ideal for production. Volumes are decoupled from the host filesystem, can be easily shared between containers, and are managed using Docker commands.
+
+In summary:
+Bind mounts are host-directory-based and user-managed, while volumes are Docker-managed, portable, and better suited for persistent data in production environments.
+
+###########################
 ##  Docker registry
 ##  Docker API & CLI
 ## Environment variables in Docker
