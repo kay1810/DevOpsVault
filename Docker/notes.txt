@@ -1,0 +1,43 @@
+dockerize nodejs app - https://github.com/SafdarJamal/docker-node-app/blob/master/Dockerfile
+
+FROM node:24.2.0
+WORKDIR /user/src/app
+COPY package*.json ./
+RUN npm install
+COPY . .
+EXPOSE 8080
+CMD ["npm", "start"]
+
+#############################3
+https://github.com/jerelquay/docker-maven-sample/tree/master
+
+dockerize java app (multistage)
+
+
+FROM maven:3.6.0-jdk-11-slim AS build  
+COPY src /usr/src/app/src  
+COPY pom.xml /usr/src/app  
+RUN mvn -f /usr/src/app/pom.xml clean package
+
+#
+# PACKAGE STAGE
+#
+FROM openjdk:11-jre-slim 
+COPY --from=build /usr/src/app/target/demo-0.0.1-SNAPSHOT.jar /usr/app/demo-0.0.1-SNAPSHOT.jar  
+EXPOSE 8080  
+CMD ["java","-jar","/usr/app/demo-0.0.1-SNAPSHOT.jar"]  
+
+#####################################
+https://github.com/patrickloeber/python-docker-tutorial/tree/main/example2
+FROM python:3.9
+
+WORKDIR /code
+
+COPY ./requirements.txt /code/requirements.txt
+
+RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
+
+COPY ./app /code/app
+
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "80"]
+
