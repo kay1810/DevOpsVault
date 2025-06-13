@@ -129,7 +129,38 @@ macvlan: This network assigns MAC(Media Access control) address to the container
 ## Security in Docker
 ## Troubleshooting
 
+Use COPY for standard file copying (recommended).
+Use ADD only if you need to extract archives or download from URLs.
 
+##################
+ENTRYPOINT
+Purpose:
+Sets the main executable that always runs when the container starts.
+Overridable:
+Not easily overridden by docker run arguments (unless you use --entrypoint).
+Typical use:
+When you want your container to always run a specific command.
+Example: ENTRYPOINT ["python", "app.py"]
+CMD
+Purpose:
+Provides default arguments for the container’s main process.
+Overridable:
+Easily overridden by arguments passed to docker run.
+Typical use:
+To set default parameters or commands, but allow users to change them.
+Example: CMD ["app.py"]
+Combined Usage
+You can use both together:
+ENTRYPOINT ["python"]
+CMD ["app.py"]
+By default, runs python app.py.
+You can override app.py with another script when running the container.
+Summary:
+
+ENTRYPOINT defines the fixed executable.
+CMD provides default arguments or commands, which can be overridden.
+Use ENTRYPOINT for required commands, CMD for defaults.
+###
 **Docker EcoSystem**
 
 ![image](https://user-images.githubusercontent.com/29191813/225827998-c45deb18-992e-42db-847a-29418893c71b.png)
