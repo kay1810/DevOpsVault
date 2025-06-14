@@ -160,6 +160,10 @@ Bind mounts are host-directory-based and user-managed, while volumes are Docker-
 ##  Docker registry
 ##  Docker API & CLI
 ## Environment variables in Docker
+ARG variables: Defined in the Dockerfile, ARG variables are passed at build time and are not available in the final image or runtime. They can be used to set a default value or modify the build process, but once the image is built, they are no longer accessible inside the running container.
+ENV variables: These environment variables persist across the image build and are available at runtime, making them useful for runtime configuration. They can be defined in the Dockerfile or passed during docker run. Any environment variable declared with ENV remains in the final image and container.
+Docker Compose environment variables: Environment variables in Docker Compose can be defined either in the docker-compose.yml file under the environment section or through an external .env file. This is a common approach when working with multi-container applications.
+################################################
 ## Monitoring , Logging in Docker
 ## Docker Networking
 
