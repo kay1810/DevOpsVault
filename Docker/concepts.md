@@ -188,6 +188,9 @@ https://docs.docker.com/engine/swarm/secrets/#intermediate-example-use-secrets-w
 https://medium.com/@rahul.fiem/how-to-troubleshoot-docker-issues-with-real-examples-bc17da3cf8c1
 https://www.linkedin.com/pulse/real-world-docker-troubleshooting-fixing-5-most-common-salunkhe-h2oyf
 https://earthly.dev/blog/debugging-docker-containers/
+
+## healthcheck - 
+https://dockerlabs.collabnix.com/beginners/dockerfile/healthcheck.html
 ##############################################################
 Use COPY for standard file copying (recommended).
 Use ADD only if you need to extract archives or download from URLs.
