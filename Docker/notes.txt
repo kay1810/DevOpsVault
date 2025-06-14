@@ -91,3 +91,31 @@ services:
 
 volumes:
   db-data:
+
+###########################################
+multistage docker build to reduce size
+# Stage 1: Build the app
+FROM node:18-alpine AS builder
+
+WORKDIR /app
+
+# Install dependencies
+COPY package*.json ./
+RUN npm ci --only=production
+
+# Copy app source code
+COPY . .
+
+# Stage 2: Create the production image
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Copy only the built app and dependencies from the builder stage
+COPY --from=builder /app ./
+
+# Expose the app port
+EXPOSE 3000
+
+# Start the app
+CMD ["node", "app.js"]
