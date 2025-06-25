@@ -1,3 +1,180 @@
+#######################
+# PowerShell Practice Scripts
+# Author: ChatGPT
+# Use: DevOps/Admin Practice, Automation
+#######################
+
+# -------------------------------
+# 1. Check Status of Service (Local & Remote)
+# -------------------------------
+# Local
+Get-Service -Name 'wuauserv'
+
+# Remote using ComputerName (WMI)
+Get-Service -ComputerName 'RemoteServer1' -Name 'wuauserv'
+
+# -------------------------------
+# 2. Replace Config File on Remote Server using PSSession
+# -------------------------------
+$session = New-PSSession -ComputerName 'RemoteServer1'
+Copy-Item -Path 'C:\local\app.config' -Destination 'C:\app\app.config' -ToSession $session -Force
+Remove-PSSession $session
+
+# -------------------------------
+# 3. Install PowerShell Module
+# -------------------------------
+Install-Module -Name Az -Force -Scope CurrentUser
+
+# -------------------------------
+# 4. Create New PowerShell Module
+# -------------------------------
+New-Item -ItemType Directory -Path .\MyModule
+New-ModuleManifest -Path .\MyModule\MyModule.psd1 -RootModule 'MyModule.psm1'
+
+# -------------------------------
+# 5. Get Disk Space on Remote Servers and Send Email
+# -------------------------------
+$servers = @("Server1", "Server2")
+$results = foreach ($server in $servers) {
+    Get-WmiObject Win32_LogicalDisk -ComputerName $server -Filter "DriveType=3" |
+    Select-Object @{n="Computer";e={$server}}, DeviceID, @{n="FreeGB";e={[math]::Round($_.FreeSpace / 1GB, 2)}}
+}
+$results | Export-Csv -Path ".\diskspace.csv" -NoTypeInformation
+Send-MailMessage -To "admin@domain.com" -From "monitor@domain.com" -Subject "Disk Report" -SmtpServer "smtp.domain.com" -Attachments ".\diskspace.csv"
+
+# -------------------------------
+# 6. Get Space Occupied by Each Folder
+# -------------------------------
+$path = "C:\Logs"
+Get-ChildItem $path -Directory | ForEach-Object {
+    $size = (Get-ChildItem $_.FullName -Recurse -File | Measure-Object -Property Length -Sum).Sum
+    [PSCustomObject]@{
+        Folder = $_.Name
+        SizeMB = [math]::Round($size / 1MB, 2)
+    }
+}
+
+# -------------------------------
+# 7. Download from Artifactory & Install MSI
+# -------------------------------
+$uri = "https://artifactory.domain.com/artifacts/myapp.msi"
+Invoke-WebRequest -Uri $uri -OutFile "C:\Temp\myapp.msi"
+Start-Process msiexec.exe -ArgumentList "/i C:\Temp\myapp.msi /quiet /norestart" -Wait
+
+# -------------------------------
+# 8. Install Windows KB
+# -------------------------------
+wusa.exe "C:\Temp\kb123456.msu" /quiet /norestart
+
+# -------------------------------
+# 9. Exception Handling
+# -------------------------------
+try {
+    Get-Item "C:\Invalid\Path"
+}
+catch {
+    Write-Host "Error occurred: $_"
+}
+finally {
+    Write-Host "Cleaning up..."
+}
+
+# -------------------------------
+# 10. REST API - GET User Data and Store as YAML/CSV
+# -------------------------------
+$response = Invoke-RestMethod -Uri "https://api.example.com/users"
+$response | ConvertTo-Yaml | Out-File "users.yaml"
+$response | Export-Csv "users.csv" -NoTypeInformation
+
+# -------------------------------
+# 11. REST API - PUT, POST, DELETE
+# -------------------------------
+# POST
+Invoke-RestMethod -Uri "https://api.example.com/users" -Method Post -Body (@{name="newuser"} | ConvertTo-Json) -ContentType "application/json"
+
+# PUT
+Invoke-RestMethod -Uri "https://api.example.com/users/1" -Method Put -Body (@{name="updatedname"} | ConvertTo-Json) -ContentType "application/json"
+
+# DELETE
+Invoke-RestMethod -Uri "https://api.example.com/users/1" -Method Delete
+
+# -------------------------------
+# 12. Input from Parameters & Dynamic Input
+# -------------------------------
+param(
+    [string]$Server,
+    [string]$ServiceName
+)
+Write-Host "Server: $Server, Service: $ServiceName"
+
+# -------------------------------
+# 13. Read YAML and Process File
+# -------------------------------
+Install-Module powershell-yaml -Force
+$data = Get-Content ".\config.yaml" | ConvertFrom-Yaml
+$data.Setting1
+
+# -------------------------------
+# 14. Secure String Input
+# -------------------------------
+$securePassword = Read-Host -AsSecureString "Enter password"
+
+# -------------------------------
+# 15. Start/Stop Service Remotely
+# -------------------------------
+Invoke-Command -ComputerName 'RemoteServer1' -ScriptBlock {
+    Stop-Service -Name 'Spooler'
+    Start-Service -Name 'Spooler'
+}
+
+# -------------------------------
+# 16. Change Service Account Login on Remote Server
+# -------------------------------
+Invoke-Command -ComputerName 'RemoteServer1' -ScriptBlock {
+    sc.exe config "MyService" obj= "DOMAIN\User" password= "Password123"
+}
+
+# -------------------------------
+# 17. Add New User to Remote Server
+# -------------------------------
+Invoke-Command -ComputerName 'RemoteServer1' -ScriptBlock {
+    $pass = ConvertTo-SecureString "Password123" -AsPlainText -Force
+    New-LocalUser -Name "NewUser" -Password $pass
+    Add-LocalGroupMember -Group "Administrators" -Member "NewUser"
+}
+
+# -------------------------------
+# 18. Clear Old Files Older Than X Days
+# -------------------------------
+$days = 30
+Get-ChildItem "C:\Temp" -Recurse | Where-Object { $_.LastWriteTime -lt (Get-Date).AddDays(-$days) } | Remove-Item -Force
+
+# -------------------------------
+# 19. Network Test to URL
+# -------------------------------
+Test-NetConnection -ComputerName "www.google.com" -Port 443
+
+# -------------------------------
+# 20. Read JSON/CSV
+# -------------------------------
+# Read JSON
+$json = Get-Content ".\data.json" | ConvertFrom-Json
+
+# Read CSV
+$csv = Import-Csv ".\data.csv"
+
+# -------------------------------
+# 21. Write to CSV
+# -------------------------------
+$data = @(
+    [PSCustomObject]@{ Name="Server1"; Status="OK" }
+    [PSCustomObject]@{ Name="Server2"; Status="Fail" }
+)
+$data | Export-Csv ".\server_status.csv" -NoTypeInformation
+
+
+
+
 #########################################################3
 Get-Service # Retrieve the status of services
 Get-Service -Name "Spooler" 
