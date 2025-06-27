@@ -51,6 +51,19 @@ The database software can run on the same physical machine as the web server, bu
 
 ![image](https://user-images.githubusercontent.com/29191813/227700803-5e4fae38-16d8-4a05-9a0f-d57ce0d38890.png)
 
+
+#####################3
+
+
+| App Type        | Build Command(s)                              | Output Location         | Output Artifact Example           |
+|-----------------|-----------------------------------------------|------------------------|-----------------------------------|
+| Java (Maven)    | `mvn clean package`                           | `target/`              | `target/your-app.jar` or `.war`   |
+| Java (Gradle)   | `./gradlew build`                             | `build/libs/`          | `build/libs/your-app.jar`         |
+| Go              | `go build -o myapp main.go`                   | Current directory      | `myapp` (binary executable)       |
+| Node.js         | `npm install` + `npm run build`               | `dist/` or `build/`    | `dist/` or `build/` folder        |
+| .NET            | `dotnet build` / `dotnet publish -o out`      | `bin/`, `out/`         | `out/` (published binaries)       |
+
+**Output artifact** refers to the file or directory produced by the build, which is typically used for deployment or as an input to the next CI/CD stage.
 ### Dotnet Application
 
 
@@ -60,4 +73,7 @@ The database software can run on the same physical machine as the web server, bu
 ### Java Application
 
 ## Basic Networking Concepts
+
+
+
 
