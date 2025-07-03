@@ -18,6 +18,25 @@
       when: ansible_os_family == "Debian"
 
 ===========================================================
+---
+- name: Install Java 11 and set JAVA_HOME
+  hosts: ubuntu_servers
+  become: yes
+  tasks:
+    - name: Install OpenJDK 11
+      apt:
+        name: openjdk-11-jdk
+        update_cache: yes
+
+    - name: Set JAVA_HOME (hardcoded)
+      copy:
+        dest: /etc/profile.d/java.sh
+        content: |
+          export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+          export PATH=$JAVA_HOME/bin:$PATH
+        mode: '0755'
+============================================
+
 
 - hosts: all
   become: yes
