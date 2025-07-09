@@ -284,5 +284,35 @@ Together, namespaces provide isolation while cgroups provide resource control.
 
 **Answer:**  
 A Docker Image is a read-only, immutable template that includes the application code, runtime, libraries, and dependencies needed to run an application. It’s essentially a packaged snapshot stored as files. A Docker Container is a running instance of an image — a live, isolated environment with its own filesystem and processes, which can be started, stopped, and modified independently. Multiple containers can be created from the same image.
+# 🧱 Section 2: Docker Images & Containers - Interview Q&A
+
+---
+
+### Q1: What is a Dockerfile, and why is it important?
+
+**Answer:**  
+A Dockerfile is a text file that contains a set of instructions on how to build a Docker image. Each instruction (like `FROM`, `RUN`, `COPY`) creates a new layer in the image. Dockerfiles automate image creation and make builds repeatable, consistent, and version-controlled.
+
+---
+
+### Q2: What are Docker image layers, and why are they important?
+
+**Answer:**  
+Docker image layers are read-only filesystem layers created for each Dockerfile instruction. They stack to form a complete image. Layers are cached and reused across builds, which speeds up builds and reduces redundancy. Containers add a writable layer on top at runtime.
+
+---
+
+### Q3: What happens when you run a Docker container from an image?
+
+**Answer:**  
+When `docker run` is executed, Docker creates a new container by adding a writable layer on top of the image layers. It sets up namespaces and cgroups for isolation, assigns networking and a container ID, and runs the specified CMD or ENTRYPOINT process inside the container.
+
+---
+
+### Q4: How do you persist data in Docker containers? Explain volumes and bind mounts.
+
+**Answer:**  
+- **Bind mounts** map a host directory or file to a path in the container using `-v /host/path:/container/path`. Useful for quick updates and development.
+- **Volumes** are Docker-managed storage units created with `docker volume create` and used with `-v volume_name:/container/path`. They’re better for p_
 
 
