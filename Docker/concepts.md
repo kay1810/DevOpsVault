@@ -227,3 +227,62 @@ Use ENTRYPOINT for required commands, CMD for defaults.
 **Docker EcoSystem**
 
 ![image](https://user-images.githubusercontent.com/29191813/225827998-c45deb18-992e-42db-847a-29418893c71b.png)
+# Docker Fundamentals - Interview Q&A
+
+---
+
+### Q1: What is Docker, and why is it useful in DevOps workflows?
+
+**Answer:**  
+Docker is an open-source containerization platform that allows developers to package applications along with all their dependencies—such as libraries, configurations, and binaries—into a single, lightweight, and portable container image. This ensures consistent environments across development, testing, and production. In DevOps, Docker enables faster CI/CD pipelines, scalable deployments, and eliminates the "it works on my machine" problem.
+
+---
+
+### Q2: How is Docker different from a Virtual Machine (VM)?
+
+**Answer:**  
+The main difference lies in how they virtualize resources. Virtual Machines (VMs) run a full guest operating system on top of a hypervisor and include virtualized hardware, which makes them heavy in terms of resource usage and slower to boot. In contrast, Docker containers share the host OS kernel and run as isolated processes on top of the Docker Engine, making them lightweight, faster to start, and more resource-efficient. Containers are ideal for microservices and CI/CD workflows because of their portability and speed.
+
+---
+
+### Q3: Can you explain the components of Docker's architecture?
+
+**Answer:**  
+Docker Architecture includes:  
+- **Docker Engine:** The core platform that runs and manages containers, including the Docker Daemon and REST API.  
+- **Docker Daemon (`dockerd`):** A background service that listens for Docker API requests and manages Docker objects like containers, images, volumes, and networks.  
+- **Docker CLI (`docker`):** The command-line tool that developers use to interact with Docker. It sends commands to the Docker Daemon via REST API.  
+- **Docker Registry:** A storage and distribution system for Docker images. Docker Hub is the default public registry, but private registries can also be used.
+
+---
+
+### Q4: Explain the relationship between Docker Engine and Docker Daemon. What role does each play in managing containers?
+
+**Answer:**  
+Docker Engine is the overall platform that includes the Docker Daemon, CLI, and REST API. The Docker Daemon is the background service responsible for managing containers, images, networks, and volumes, while the CLI communicates with the daemon via REST API to execute user commands.
+
+---
+
+### Q5: If the Docker CLI communicates with the Docker Daemon via REST API, how does the Docker Daemon communicate internally or with containers?
+
+**Answer:**  
+The Docker Daemon uses container runtimes like `runc` and interacts directly with the Linux kernel features such as namespaces and cgroups to create and manage containers. It does not use REST API internally to communicate with containers. The REST API is mainly used for communication between the CLI and the daemon.
+
+---
+
+### Q6: What are namespaces and cgroups in the context of Docker?
+
+**Answer:**  
+- **Namespaces:** Provide process isolation by partitioning kernel resources so that each container gets its own separate “view” of system resources such as process IDs, networking, and filesystems. Types include PID, NET, MNT, UTS, IPC, and USER namespaces.  
+- **Control Groups (cgroups):** Limit, account for, and isolate the resource usage (CPU, memory, disk I/O, network) of containers to ensure fair resource allocation and prevent resource hogging.
+
+Together, namespaces provide isolation while cgroups provide resource control.
+
+---
+
+### Q7: What is a Docker Image, and how does it differ from a Docker Container?
+
+**Answer:**  
+A Docker Image is a read-only, immutable template that includes the application code, runtime, libraries, and dependencies needed to run an application. It’s essentially a packaged snapshot stored as files. A Docker Container is a running instance of an image — a live, isolated environment with its own filesystem and processes, which can be started, stopped, and modified independently. Multiple containers can be created from the same image.
+
+
